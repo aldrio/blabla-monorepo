@@ -1,0 +1,24 @@
+{
+  "name": "@blabla/api",
+  "scripts": {
+    "dev": "ts-node-dev --respawn ./src/index.ts",
+    "test": "jest",
+    "lint": "",
+    "build": "ttsc -b",
+    "start": "node ./build/index.js"
+  },
+  "dependencies": {
+    "@blabla/library": "workspace:packages/library",
+    "ts-node-dev": "^1.1.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.20",
+    "@types/node": "^14.14.22",
+    "@zerollup/ts-transform-paths": "^1.7.18",
+    "jest": "^26.6.3",
+    "ts-jest": "^26.4.4",
+    "ts-node": "^9.1.1",
+    "ttypescript": "^1.5.12",
+    "typescript": "^4.1.3"
+  }
+}
