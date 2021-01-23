@@ -1,23 +1,9 @@
 {
+  "extends": "./tsconfig/base.json",
   "ts-node": {
     "compiler": "ttypescript"
   },
   "compilerOptions": {
-    "target": "es2019",
-    "lib": ["es2020"],
-    "module": "commonjs",
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "resolveJsonModule": true,
-    "sourceMap": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "declaration": true,
-    "incremental": true,
-
     "rootDir": "./src",
     "outDir": "./bin",
     "baseUrl": "./src",

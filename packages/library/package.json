@@ -8,6 +8,7 @@
     "build": "ttsc -b"
   },
   "devDependencies": {
+    "@blabla/scripts": "workspace:packages/_scripts",
     "@types/jest": "^26.0.20",
     "@types/node": "^14.14.22",
     "@zerollup/ts-transform-paths": "^1.7.18",

@@ -379,6 +379,7 @@ __metadata:
   resolution: "@blabla/api@workspace:packages/api"
   dependencies:
     "@blabla/library": "workspace:packages/library"
+    "@blabla/scripts": "workspace:packages/_scripts"
     "@types/jest": ^26.0.20
     "@types/node": ^14.14.22
     "@zerollup/ts-transform-paths": ^1.7.18
@@ -395,6 +396,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@blabla/library@workspace:packages/library"
   dependencies:
+    "@blabla/scripts": "workspace:packages/_scripts"
     "@types/jest": ^26.0.20
     "@types/node": ^14.14.22
     "@zerollup/ts-transform-paths": ^1.7.18
