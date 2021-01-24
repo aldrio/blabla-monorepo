@@ -1,40 +1,40 @@
-import childProcess from "child_process";
+import childProcess from 'child_process'
 
 type Workspace = {
-  location: string;
-  name: string;
-  workspaceDependencies: string[];
-};
+  location: string
+  name: string
+  workspaceDependencies: string[]
+}
 
 // Get list of workspaces
 const workspaces: Workspace[] = childProcess
-  .execFileSync("yarn", ["workspaces", "list", "--json", "--verbose"])
+  .execFileSync('yarn', ['workspaces', 'list', '--json', '--verbose'])
   .toString()
-  .split("\n")
+  .split('\n')
   .filter((s) => !!s)
-  .map((s) => JSON.parse(s));
+  .map((s) => JSON.parse(s))
 
 // Get list of changed dirs from git
 const changedDirs = childProcess
-  .execFileSync("git", ["diff", "origin/main", "--name-only"])
+  .execFileSync('git', ['diff', 'origin/main', '--name-only'])
   .toString()
-  .split("\n")
-  .filter((s) => !!s);
+  .split('\n')
+  .filter((s) => !!s)
 
 // Find workspaces with changed dirs
 const changedWorkspaces = workspaces.filter(
   ({ location }) =>
     !!changedDirs.find((d) => d.startsWith(location)) ||
-    (location === "." &&
+    (location === '.' &&
       // If the changedDir doesnt match any package then resolve true for root
       !!changedDirs.find(
         (d) => !workspaces.find(({ location }) => d.startsWith(location))
       ))
-);
+)
 
 if (changedWorkspaces.length === 0) {
-  console.log("No workspaces have changed");
-  process.exit(0);
+  console.log('No workspaces have changed')
+  process.exit(0)
 }
 
 // Run for changed dependencies and workspaces dependent on them
@@ -46,38 +46,38 @@ function recursivelyGetDependents(location: string): string[] {
     .flatMap(({ location }) => [
       location,
       ...recursivelyGetDependents(location),
-    ]);
+    ])
 }
 
 const workspacesLocationsToRun = changedWorkspaces
   .map((w) => w.location)
-  .flatMap((l) => [l, ...recursivelyGetDependents(l)]);
+  .flatMap((l) => [l, ...recursivelyGetDependents(l)])
 
 // Convert to workspace names and run
 const workspacesToRun = Array.from(
   new Set(
     workspacesLocationsToRun.map(
-      (location) => workspaces.find((w) => w.location === location)!.name
+      (location) => workspaces.find((w) => w.location === location)?.name || ''
     )
   )
-);
+)
 
 // Run yarn workspaces command with included workspaces
-const args = process.argv.slice(2);
+const args = process.argv.slice(2)
 
 console.log(
-  `Running \`${args.join(" ")}\` in these workspaces:\n\t${workspacesToRun.join(
-    "\n\t"
+  `Running \`${args.join(' ')}\` in these workspaces:\n\t${workspacesToRun.join(
+    '\n\t'
   )}`
-);
+)
 childProcess.execFileSync(
-  "yarn",
+  'yarn',
   [
-    "workspaces",
-    "foreach",
-    "--verbose",
-    ...workspacesToRun.map((w) => ["--include", w]).flat(),
+    'workspaces',
+    'foreach',
+    '--verbose',
+    ...workspacesToRun.map((w) => ['--include', w]).flat(),
     ...args,
   ],
-  { stdio: "inherit" }
-);
+  { stdio: 'inherit' }
+)

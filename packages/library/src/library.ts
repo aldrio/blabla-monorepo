@@ -1,2 +1,2 @@
-export * from "add";
-export * from "mul";
+export * from 'add'
+export * from 'mul'
