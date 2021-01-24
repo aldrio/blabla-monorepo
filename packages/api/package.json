@@ -3,20 +3,31 @@
   "scripts": {
     "dev": "ts-node-dev --respawn ./src/index.ts",
     "test": "jest",
-    "lint": "",
+    "lint": "eslint .",
     "build": "ttsc -b",
     "start": "node ./build/index.js"
   },
   "dependencies": {
     "@blabla/library": "workspace:packages/library",
+    "knex": "^0.21.16",
     "ts-node-dev": "^1.1.1"
   },
   "devDependencies": {
     "@blabla/scripts": "workspace:packages/_scripts",
+    "@types/eslint": "^7",
+    "@types/eslint-plugin-prettier": "^3",
     "@types/jest": "^26.0.20",
     "@types/node": "^14.14.22",
+    "@types/prettier": "^2",
+    "@typescript-eslint/eslint-plugin": "^4.14.0",
+    "@typescript-eslint/parser": "^4.14.0",
     "@zerollup/ts-transform-paths": "^1.7.18",
+    "eslint": "^7.18.0",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-prettier": "^3.3.1",
     "jest": "^26.6.3",
+    "prettier": "^2.2.1",
     "ts-jest": "^26.4.4",
     "ts-node": "^9.1.1",
     "ttypescript": "^1.5.12",
