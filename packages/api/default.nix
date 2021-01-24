@@ -2,7 +2,7 @@
 
 let
   # Specify runtime and build dependencies
-  runtimeInputs = with pkgs; [ ];
+  runtimeInputs = with pkgs; [ cowsay ];
   buildInputs = with pkgs; runtimeInputs ++ [ ];
 
   src = pkgs.lib.cleanSource ../..;
@@ -49,7 +49,7 @@ in project.overrideAttrs (oldAttrs: {
     # Create executable to wrap yarn with runtime environment as an entrypoint
     makeWrapper "$out/libexec/$sourceRoot/.yarn/releases/yarn-berry.cjs" "$out/bin/api" \
       --run "cd $out/libexec/$sourceRoot" \
-      --prefix : PATH ${lib.makeBinPath runtimeInputs}
+      --prefix PATH : ${lib.makeBinPath runtimeInputs}
 
     runHook postInstall
   '';

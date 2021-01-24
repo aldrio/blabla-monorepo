@@ -1,4 +1,4 @@
-import { helloProduct, helloSum } from 'api'
+import { cowsay, helloProduct, helloSum } from 'api'
 
 describe('api', () => {
   it('says hello sum', () => {
@@ -6,5 +6,10 @@ describe('api', () => {
   })
   it('says hello product', () => {
     expect(helloProduct(1, 3)).toEqual('hello 3')
+  })
+  it('cowsay works', () => {
+    const wat = cowsay('wat')
+    expect(typeof wat).toBe('string')
+    expect(wat.includes('wat')).toBe(true)
   })
 })

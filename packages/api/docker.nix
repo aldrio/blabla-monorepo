@@ -15,6 +15,6 @@ in pkgs.dockerTools.buildImage {
   config = {
     Entrypoint = [ "/bin/api" ];
     WorkingDir = "/libexec/source";
-    Cmd = [ "/bin/api" ];
+    Cmd = [ "run" "start" ];
   };
 }
