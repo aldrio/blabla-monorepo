@@ -5,12 +5,12 @@
     "test": "jest",
     "lint": "eslint .",
     "build": "ttsc -b",
+    "build:nix": "nix-build ./default.nix",
+    "build:docker": "docker load < $(nix-build ./docker.nix)",
     "start": "node ./build/index.js"
   },
   "dependencies": {
-    "@blabla/library": "workspace:packages/library",
-    "knex": "^0.21.16",
-    "ts-node-dev": "^1.1.1"
+    "@blabla/library": "workspace:packages/library"
   },
   "devDependencies": {
     "@blabla/scripts": "workspace:packages/_scripts",
@@ -30,6 +30,7 @@
     "prettier": "^2.2.1",
     "ts-jest": "^26.4.4",
     "ts-node": "^9.1.1",
+    "ts-node-dev": "^1.1.1",
     "ttypescript": "^1.5.12",
     "typescript": "^4.1.3"
   }
