@@ -6,6 +6,13 @@ type Workspace = {
   workspaceDependencies: string[]
 }
 
+// Parse arguments
+let commit = 'HEAD'
+if (process.argv.length >= 4 && process.argv[2] === '--branch') {
+  commit = process.argv[3]
+  process.argv.splice(2, 2)
+}
+
 // Get list of workspaces
 const workspaces: Workspace[] = childProcess
   .execFileSync('yarn', ['workspaces', 'list', '--json', '--verbose'])
@@ -16,7 +23,7 @@ const workspaces: Workspace[] = childProcess
 
 // Get list of changed dirs from git
 const changedDirs = childProcess
-  .execFileSync('git', ['diff', 'origin/main', '--name-only'])
+  .execFileSync('git', ['diff', commit, '--name-only'])
   .toString()
   .split('\n')
   .filter((s) => !!s)
