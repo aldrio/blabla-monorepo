@@ -121,6 +121,3 @@ dist
 !.yarn/releases
 !.yarn/plugins
 .pnp.*
-
-# yarn-plugin-nixify
-yarn-project.nix
