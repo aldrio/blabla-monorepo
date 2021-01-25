@@ -5,7 +5,14 @@
     "packages/*"
   ],
   "scripts": {
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "all:dev": "yarn workspaces foreach --all -vpi run dev",
+    "all:test": "yarn workspaces foreach --all -vpi run test",
+    "changed:test": "yarn foreach-changed -pi run dev",
+    "all:lint": "yarn workspaces foreach --all -vp run lint",
+    "changed:lint": "yarn foreach-changed -p run lint",
+    "all:build": "yarn workspaces foreach --all -vp --topological-dev run build",
+    "changed:build": "yarn foreach-changed -p --topological-dev run build"
   },
   "dependencies": {
     "@blabla/scripts": "workspace:packages/_scripts",
