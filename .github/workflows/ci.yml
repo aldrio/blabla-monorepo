@@ -1,4 +1,4 @@
-name: CI
+name: Tests
 
 on:
   push:
@@ -19,11 +19,10 @@ jobs:
           nix_path: nixpkgs=channel:nixos-unstable
       - name: Set up environment
         run: |
-          yarn install
+          yarn install --immutable
 
       # TODO: We can use the custom foreach command to only build/lint/test changed workspaces
       - name: Build
-        if: github.ref == 'refs/heads/main'
         run: |
           yarn workspaces foreach -vApt run build
       - name: Lint
